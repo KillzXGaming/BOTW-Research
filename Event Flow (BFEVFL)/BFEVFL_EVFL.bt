@@ -1,0 +1,242 @@
+// ==== Structures =====================================================================================================
+
+typedef struct // EFEVL
+{
+	char signature[8]; // EFEVL
+	uint64 Unk;
+    ushort AttributeCount;
+    ushort unk;
+    ushort unk;
+    ushort EventCount; 
+	uint64 EventEntryDataCount;
+    NameOffset nameOffset;
+	uint64 EventAttributeOffset;
+	uint64 EventArrayOffset;
+	uint64 EventDictOffset;
+	uint64 EventEntryDataOffset;	
+
+   local uint posM <hidden=true> = FTell();
+
+	if (EventDictOffset)
+	{
+		FSeek(EventDictOffset);
+		Dict EventEntrykDict(DT_NONE);
+	}
+
+	if (EventAttributeOffset)
+	{
+		FSeek(EventAttributeOffset);
+		EventAttributes event <name="struct Event Attributes/Actors">;
+	}
+
+	if (EventArrayOffset)
+	{
+		FSeek(EventArrayOffset);
+        Events events;
+	}
+
+	if (EventEntryDataOffset)
+	{
+		FSeek(EventEntryDataOffset);
+        EventSection EventEntry[EventEntryDataCount];
+	}
+
+     FSeek(posM);
+
+typedef struct //  EVENTS
+{
+    local int i <hidden=true> = 0;
+    for(i = 0; i < AttributeCount; i++ ){
+    EventAttribute eventAttribute <bgcolor=0xFFCDEF>;
+}
+}EventAttributes;
+
+typedef struct //  EVENTS
+{
+    local int i <hidden=true> = 0;
+    for(i = 0; i < EventCount; i++ ){
+    Event event <bgcolor=0xFDCDEF>;
+}
+}Events <bgcolor=0xFFDDEF>;
+
+typedef struct //  EVENT
+{
+	uint64 UnkOffset;
+	uint64 Unk;	
+	uint64 Unk;	
+	uint Unk;	
+	uint Unk;	
+
+    local uint pos <hidden=true> = FTell();
+
+
+	FSeek(pos);
+
+
+}EventSection <bgcolor=0xFDCDEF>;
+
+typedef struct //  EVENT
+{
+	NameOffset EventName;
+    ushort Unk;
+    ushort Unk;
+    ushort Unk;
+    ushort Unk;
+	uint64 UnkOffset;	
+	uint64 Unk;	
+    NameOffset flag;
+    local uint pos <hidden=true> = FTell();
+
+	if (UnkOffset)
+	{
+		FSeek(UnkOffset);
+        EventData eventData;
+	}
+
+	FSeek(pos);
+
+
+}Event <bgcolor=0xFDCDEF>;
+
+typedef struct //  EVENT
+{
+    ushort Unk;
+    ushort Unk;
+    ushort Unk;
+    ushort Unk;
+	NameOffset entryName;
+
+
+}EventEntryData <bgcolor=0xFDCDEF>;
+
+typedef struct //  EVENT
+{
+    ushort Unk;	
+    ushort EventDataCount;	
+	uint Unk;
+	uint64 UnkDictOffset;
+    local uint pos <hidden=true> = FTell();
+
+ //   uint64 DataOffset[EventDataCount];
+
+     EventEntryDatas eventEntryDatas;
+
+    
+
+     if (UnkDictOffset)
+     {
+		FSeek(EventDictOffset);
+		Dict unkDict(DT_NONE);
+     }
+	FSeek(pos);
+
+}EventData <bgcolor=0xFDCDEF>;
+
+typedef struct //  EVENTS
+{
+   local uint pos <hidden=true> = FTell();
+
+    local int i <hidden=true> = 0;
+    for(i = 1; i < EventDataCount; i++ ){
+    uint64 dataOffset;
+}
+    FSeek(pos);
+   for(i = 1; i < EventDataCount; i++ ){
+    uint64 DataOffset <hidden=true>;
+    FSeek(DataOffset);
+    EventEntryData eventEntryData <bgcolor=0xFFCDEF>;
+    FSeek(pos + i * 8);
+}
+}EventEntryDatas;
+
+typedef struct // EFEVL Attributes/Actors
+{
+	NameOffset AttributeName;
+	NameOffset unkName;
+	NameOffset unkName;
+	uint64 DemoNameArrayOffset;
+	uint64 CheckNameArrayOffset;
+	uint64 EventAttributeDataOffset;
+	ushort DemoNameCount;	
+	ushort CheckNameCount;	
+	ushort Unk;	
+	ushort Unk;	
+    local uint posM <hidden=true> = FTell();
+
+
+    if (DemoNameArrayOffset)
+    {
+         FSeek(DemoNameArrayOffset);
+         DemoNameArray demoName;
+     }
+    if (CheckNameArrayOffset)
+    {
+         FSeek(CheckNameArrayOffset);
+         CheckNameArray checkName;
+     }
+    if (EventAttributeDataOffset)
+    {
+        FSeek(EventAttributeDataOffset);
+        EventAttributeData eventAttributeData;
+     }
+
+    FSeek(posM);
+
+}EventAttribute;
+
+typedef struct //  DemoNames
+{
+    local int i <hidden=true> = 0;
+    for(i = 0; i < DemoNameCount; i++ ){
+    NameOffset demoName;
+}
+}DemoNameArray;
+
+typedef struct //  CheckNames
+{
+    local int i <hidden=true> = 0;
+    for(i = 0; i < CheckNameCount; i++ ){
+    NameOffset demoName;
+}
+}CheckNameArray;
+
+typedef struct // EFEVL
+{
+    ushort Unk;	
+    ushort EventDataCount;	
+	uint Unk;
+	uint64 UnkDictOffset;
+
+    local uint posM <hidden=true> = FTell();
+
+    uint64 DataOffset[EventDataCount];
+
+/*    for(i = 0; i < EventDataCount; i++ ){
+    uint64 DataOffset;
+  
+    if (DataOffset)
+    {
+         FSeek(DataOffset);
+	     uint data;
+         FSeek(posM + i * 7);
+    }
+
+    }*/
+
+
+	if (UnkDictOffset) 
+	{
+		FSeek(UnkDictOffset);
+		Dict UnkDictOffset(DT_NONE);
+	}
+
+}EventAttributeData;
+
+
+
+
+} EVFL <bgcolor=0xCDE6FF>;
+
+// ==== Template Methods ===============================================================================================
+
+

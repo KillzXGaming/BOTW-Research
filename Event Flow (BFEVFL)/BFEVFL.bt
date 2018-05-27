@@ -1,0 +1,62 @@
+//------------------------------------------------
+//--- 010 Editor v8.0 Binary Template
+//
+//      File: BFEVFL.bt
+//   Authors: KillzXGaming, Syroot for base
+//   Version: 1.0.0
+//  Category: Wii U/Switch
+// File Mask: *.BFEVFL
+//  ID Bytes: 46 52 45 53 //FRES
+//------------------------------------------------
+
+// ==== Forward Declarations ===========================================================================================
+
+// ---- Common ----
+
+struct Header;
+struct Offset; struct NameOffset;
+struct Dict; struct DictNode; struct DictNodeName;
+enum DictType
+{
+	DT_NONE,
+	DT_TEXTURE_REF, DT_STRING, DT_USER_DATA,
+	DT_MODEL,
+		DT_BONE,
+		DT_VERTEX_ATTRIB,
+		DT_SHAPE, DT_KEY_SHAPE,
+		DT_MATERIAL, DT_RENDER_INFO, DT_SAMPLER,
+	DT_TEXTURE,
+	DT_SKELETAL_ANIM,
+	DT_SHADER_PARAM_ANIM,
+	DT_TEX_PATTERN_ANIM,
+	DT_VISIBILITY_ANIM,
+	DT_SHAPE_ANIM,
+	DT_SCENE_ANIM, DT_CAMERA_ANIM, DT_LIGHT_ANIM, DT_FOG_ANIM,
+	DT_EXTERNAL_FILE,
+	DT_SHADING_MODEL,
+		DT_SHADER_OPTION, DT_ATTRIB_VAR, DT_SAMPLER_VAR, DT_UNIFORM_BLOCK_VAR
+};
+struct TextureRef;
+struct AnimCurve;
+struct UserData;
+struct RELT; struct RELTSection; struct RELTEntry;
+
+// ---- Section Specific ----
+
+struct EVFL; struct EventAttribute; struct EventAttributes; struct EventAttributeData;
+struct DemoNameArray; struct CheckNameArray;
+struct Events; struct Event; struct EventData;
+struct EventSection; struct EventEntryData; struct EventEntryDatas;
+
+// ==== Includes =======================================================================================================
+
+#include "math.bt"
+#include "BFEVFL_common.bt"
+#include "BFEVFL_EVFL.bt"
+
+
+// ==== File Contents ==================================================================================================
+
+LittleEndian();
+BitfieldRightToLeft();
+Header file <open=true>;
